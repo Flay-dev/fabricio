@@ -19,13 +19,31 @@
     
     .hero-gradient {
       background: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, #0a0a0a 100%),
-                  linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #0a0a0a 100%);
+                  linear-gradient(135deg, #10b981 0%, #059669 30%, #047857 60%, #0a0a0a 100%);
       position: relative;
       overflow: hidden;
     }
     
+    .hero-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+      50% { transform: scale(1.1) rotate(180deg); opacity: 0.8; }
+    }
+    
     .hero-overlay {
-      background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
+      background: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.3) 0%, transparent 70%);
+      position: relative;
+      z-index: 1;
     }
     
     .avatar-container {
@@ -37,7 +55,7 @@
     .avatar-ring {
       position: absolute;
       inset: -3px;
-      background: linear-gradient(135deg, #a855f7, #6366f1, #ec4899);
+      background: linear-gradient(135deg, #10b981, #059669, #34d399);
       border-radius: 50%;
       animation: rotate 4s linear infinite;
     }
@@ -51,16 +69,17 @@
       position: relative;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 42px;
-      font-weight: 700;
+      font-size: 48px;
+      font-weight: 800;
       color: white;
-      box-shadow: 0 20px 50px rgba(99, 102, 241, 0.4);
+      box-shadow: 0 20px 60px rgba(16, 185, 129, 0.5), 0 0 40px rgba(5, 150, 105, 0.3);
       z-index: 1;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
     
     .carousel-container {
@@ -83,31 +102,52 @@
     }
     
     .product-card {
-      min-width: 280px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
+      min-width: 300px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
       overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.1));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    
+    .product-card:hover::before {
+      opacity: 1;
     }
     
     .product-card:hover {
-      transform: scale(1.05) translateY(-8px);
-      border-color: rgba(168, 85, 247, 0.5);
-      box-shadow: 0 20px 40px rgba(168, 85, 247, 0.3);
+      transform: scale(1.08) translateY(-12px);
+      border-color: rgba(16, 185, 129, 0.6);
+      box-shadow: 0 25px 50px rgba(16, 185, 129, 0.4), 0 0 80px rgba(52, 211, 153, 0.2);
       z-index: 10;
     }
     
     .product-image {
       width: 100%;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: brightness(0.9);
     }
     
     .product-card:hover .product-image {
-      transform: scale(1.1);
+      transform: scale(1.15);
+      filter: brightness(1.1);
     }
     
     .carousel-btn {
@@ -129,8 +169,8 @@
     }
     
     .carousel-btn:hover {
-      background: rgba(168, 85, 247, 0.8);
-      border-color: rgba(168, 85, 247, 0.5);
+      background: rgba(16, 185, 129, 0.8);
+      border-color: rgba(16, 185, 129, 0.5);
       transform: translateY(-50%) scale(1.1);
     }
     
@@ -143,51 +183,74 @@
     }
     
     .cta-button {
-      background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
-      padding: 16px 40px;
+      background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #059669 100%);
+      padding: 18px 48px;
       border-radius: 50px;
-      font-weight: 600;
+      font-weight: 700;
       color: white;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 24px rgba(168, 85, 247, 0.3);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4), 0 0 40px rgba(52, 211, 153, 0.2);
       display: inline-block;
+      position: relative;
+      overflow: hidden;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .cta-button:hover::before {
+      left: 100%;
     }
     
     .cta-button:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 12px 32px rgba(168, 85, 247, 0.4);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5), 0 0 60px rgba(52, 211, 153, 0.3);
     }
     
     .badge {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(34, 211, 238, 0.2));
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 6px 16px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(34, 211, 238, 0.3));
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      padding: 8px 18px;
       border-radius: 50px;
       font-size: 13px;
       color: #60a5fa;
-      font-weight: 600;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+      backdrop-filter: blur(10px);
     }
     
     .category-pill {
-      background: rgba(168, 85, 247, 0.1);
-      border: 1px solid rgba(168, 85, 247, 0.2);
-      padding: 8px 16px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(52, 211, 153, 0.15));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 10px 20px;
       border-radius: 50px;
       font-size: 14px;
-      color: #c084fc;
-      font-weight: 500;
+      color: #6ee7b7;
+      font-weight: 600;
       transition: all 0.3s ease;
       cursor: pointer;
       display: inline-block;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+      backdrop-filter: blur(10px);
     }
     
     .category-pill:hover {
-      background: rgba(168, 85, 247, 0.2);
-      border-color: rgba(168, 85, 247, 0.4);
-      transform: scale(1.05);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(52, 211, 153, 0.3));
+      border-color: rgba(16, 185, 129, 0.6);
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
     }
     
     .fade-in {
@@ -208,10 +271,13 @@
     .price-tag {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: white;
-      padding: 6px 16px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 18px;
+      padding: 8px 18px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 19px;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+      display: inline-block;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -239,8 +305,8 @@
       </div>
      </div><!-- Hero Text -->
      <div class="text-center max-w-3xl mx-auto mb-10 fade-in">
-      <h2 id="welcome-text" class="text-3xl md:text-4xl font-bold text-white mb-4">Produtos Selecionados Especialmente para Você</h2>
-      <p id="personal-message" class="text-lg text-gray-300 mb-8">Como afiliado do Mercado Livre, eu testo e recomendo apenas os melhores produtos com ótimo custo-benefício</p><a id="hero-cta-link" href="https://www.mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="cta-button"> <span id="hero-button-text">Ver Todos os Produtos</span> </a>
+      <h2 id="welcome-text" class="text-3xl md:text-5xl font-extrabold text-white mb-6" style="text-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); line-height: 1.2;">Produtos Selecionados Especialmente para Você</h2>
+      <p id="personal-message" class="text-lg md:text-xl text-gray-200 mb-8 leading-relaxed">Como afiliado do Mercado Livre, eu testo e recomendo apenas os melhores produtos com ótimo custo-benefício</p><a id="hero-cta-link" href="https://www.mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="cta-button"> <span id="hero-button-text">Ver Todos os Produtos</span> </a>
      </div>
     </div>
    </div>
@@ -306,7 +372,7 @@
     </div>
    </div>
   </section><!-- CTA Section -->
-  <section class="w-full bg-gradient-to-b from-black to-purple-950 py-20">
+  <section class="w-full bg-gradient-to-b from-black to-green-950 py-20">
    <div class="max-w-4xl mx-auto px-6 text-center">
     <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para começar?</h3>
     <p class="text-xl text-gray-300 mb-8">Explore toda a coleção e encontre o produto perfeito para você</p><a id="footer-cta-link" href="https://www.mercadolivre.com.br" target="_blank" rel="noopener noreferrer" class="cta-button text-lg"> <span id="footer-button-text">Visitar Loja Completa</span> </a>
@@ -329,8 +395,8 @@
       background_color: "#0a0a0a",
       secondary_surface: "#1a1a1a",
       text_color: "#ffffff",
-      primary_action: "#a855f7",
-      secondary_action: "#6366f1",
+      primary_action: "#10b981",
+      secondary_action: "#059669",
       font_family: "Plus Jakarta Sans, sans-serif",
       font_size: 16
     };
@@ -465,5 +531,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aa79eb431dc8aef',t:'MTc2NTE0ODIyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aa7a77e66a98aef',t:'MTc2NTE0ODU4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
